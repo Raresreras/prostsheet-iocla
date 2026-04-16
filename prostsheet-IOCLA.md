@@ -9,16 +9,16 @@ P.S. Nu deschideti niciun Pull Request ca devine acest repo platforma colaborati
 # Comenzi
 
 ## Tools
-nm					- afiseaza adresa simbolurilor
-nm -n 				- afiseaza adresa simbolurilor sortate
-	.data - D
-	.bss - B
-	.rodata - R
+nm                  - afiseaza adresa simbolurilor
+nm -n               - afiseaza adresa simbolurilor sortate
+    .data - D
+    .bss - B
+    .rodata - R
 
-objdump -d        	- dezasambleaza cod masina
-objdump -d -S     	- dezasambleaza cod masina + adauga cod C (trebuie -g)
-objdump -t  		- afisare tabel simboluri
-objdump -s			- continut hexa al sectiunilor
+objdump -d          - dezasambleaza cod masina
+objdump -d -S       - dezasambleaza cod masina + adauga cod C (trebuie -g)
+objdump -t          - afisare tabel simboluri
+objdump -s          - continut hexa al sectiunilor
 objdump -t <binary> | grep -E '\.data|\.rodata|\.bss'
 
 ## Pwndbg
@@ -76,9 +76,9 @@ Quad
 
 Word/byte
 
-	mov al, byte [dividend1]
-	mov bl, byte [divisor1]
-	div bl
+    mov al, byte [dividend1]
+    mov bl, byte [divisor1]
+    div bl
 
     xor rbx, rbx
     mov bl, al
@@ -142,7 +142,54 @@ Doublequadword/quadword
 
 ## Comparare
 
+je  - egal
+jne - neegal
+jl  - mai mic
+jle - mai mic sau egal
+jg  - mai mare
+jge - mai mare sau egal
+
+### Egal cu zero
+
+test rax, rax
+jz <label>
+
+### Negativ
+
+test rax, rax
+js <label>
+
+### Cmp
+
+cmp eax, 5
+je  .egal
+jne .diferit
+jl  .mai_mic
+jg  .mai_mare
+jb  .mai_mic_u      (unsigned)
+ja  .mai_mare_u     (unsigned)
+
 ## Structuri
+
+### Definire structuri
+
+struc my_struct
+    int_x: resb 4
+    char_y: resb 1
+    string_s: resb 32
+endstruc
+
+section .data
+    sample_obj:
+        istruc my_struct
+            at int_x, dd 1000
+            at char_y, db 'a'
+            at string_s, db 'My string is better than yours', 0
+        iend
+
+### Accesare structuri
+
+mov rax, [sample_obj + int_x]
 
 ## Apelare functie
 Pentru a apela o functie folosim urmatorul cod
@@ -153,9 +200,9 @@ call <functie>
 ### String copy
 Acest cod copiaza 8 octeti din source in dest
 
-	lea rdi, [rel dest]
-	lea rsi, [rel source]
+    lea rdi, [rel dest]
+    lea rsi, [rel source]
 
-	mov rcx, 8 ; 8 bytes
-	rep movsb
+    mov rcx, 8 ; 8 bytes
+    rep movsb
 
