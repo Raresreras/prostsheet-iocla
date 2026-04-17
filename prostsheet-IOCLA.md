@@ -206,3 +206,30 @@ Acest cod copiaza 8 octeti din source in dest
     mov rcx, 8 ; 8 bytes
     rep movsb
 
+## Various
+
+### Labels
+
+.label: - label cu scope local
+label:  - label cu scope global 
+
+### Registers
+
+RAX         - Accumulator
+RBX         - Base 
+RCX         - Counter
+RDX         - Data
+
+RSI         - Source
+RDI         - Destination
+RBP         - Base -> stack
+RSP         - Top -> stack
+
+R8 - R15    - General purpose (doar pe x64)
+
+### SHIFTS
+
+Doar asa putem da shift pe biti
+
+shr/shl <registru>, imediat
+shr/shl <registru>, cl
