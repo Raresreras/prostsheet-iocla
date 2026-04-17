@@ -233,3 +233,11 @@ Doar asa putem da shift pe biti
 
 shr/shl <registru>, imediat
 shr/shl <registru>, cl
+
+### Adresare
+
+In adresarea de forma
+
+base + index * scale + displacement
+
+scale poate avea doar valorile 1, 2, 4 si 8
